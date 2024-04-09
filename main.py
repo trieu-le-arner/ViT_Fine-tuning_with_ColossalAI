@@ -43,7 +43,7 @@ def main():
     
     image_processor = ViTImageProcessor.from_pretrained(args.model_name)
     train_dataset = OxfordPetDataset(image_processor, split="train")
-    eval_dataset = OxfordPetDataset(image_processor, split="validation")
+    eval_dataset = OxfordPetDataset(image_processor, split="test")
     
     config = ViTConfig.from_pretrained(args.model_name)
     config.num_labels = len(train_dataset.unique_labels)
