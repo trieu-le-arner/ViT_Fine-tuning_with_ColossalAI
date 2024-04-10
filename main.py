@@ -97,7 +97,7 @@ def benchmark(args, model, train_dataloader, optimizer, criterion, lr_scheduler,
     model.train()
     train_data_iter = iter(train_dataloader)
     
-    with tqdm(range(args.max_train_steps), desc="Benchmarking") as pbar:
+    with tqdm.tqdm(range(args.max_train_steps), desc="Benchmarking") as pbar:
         for _ in pbar:
             _, _ = run_forward_backward(model, optimizer, criterion, train_data_iter, booster)
             optimizer.step()
