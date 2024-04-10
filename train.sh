@@ -3,7 +3,7 @@ MODEL="google/vit-base-patch16-224"
 OUTPUT_PATH="./output_model"
 
 PLUGIN="gemini"
-GRAD_CHECKPOINT=1 # 0: disable, 1: enable
+GRAD_CHECKPOINT="True"
 GPUNUM=1
 
 BS=16
