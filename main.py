@@ -8,7 +8,6 @@ from colossalai.cluster import DistCoordinator
 from colossalai.logging import disable_existing_loggers, get_dist_logger
 from colossalai.nn.lr_scheduler import CosineAnnealingWarmupLR
 from colossalai.nn.optimizer import HybridAdam
-from colossalai.utils import colo_device_memory_capacity, colo_set_process_memory_fraction
 
 from dataset import OxfordPetDataset, oxford_pet_collator
 import time
@@ -84,6 +83,7 @@ def train(args, model, train_dataloader, eval_dataloader, optimizer, criterion, 
 def benchmark(args, model, train_dataloader, optimizer, criterion, lr_scheduler, booster, coordinator, logger):
     # What happens if the memory cap is set for different plugins?
     if args.mem_cap > 0:
+        from colossalai.utils import colo_device_memory_capacity, colo_set_process_memory_fraction
         cuda_capacity = colo_device_memory_capacity(get_accelerator().get_current_device())
         if args.mem_cap * (1024**3) < cuda_capacity:
             colo_set_process_memory_fraction(args.mem_cap * (1024**3) / cuda_capacity)
